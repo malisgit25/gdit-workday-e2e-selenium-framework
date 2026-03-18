@@ -1,3 +1,5 @@
+Note: To opent the report invoke this URL: https://malisgit25.github.io/GDIT-Woryday-Career-E2E-Framework/reports/index.html 
+
 # GDIT-Woryday-Career-E2E-Framework
 
 ## Overview
