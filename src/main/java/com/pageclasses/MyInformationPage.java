@@ -22,7 +22,7 @@ public class MyInformationPage {
 	public By county = By.id("address--regionSubdivision1");
 	public By phonedevicetype = By.id("phoneNumber--phoneType");
 	public By phonenumber = By.id("phoneNumber--phoneNumber");
-	public By saveandcontinue = By.cssSelector("button[data-automation-id='pageFooterNextButton']");
+	public By saveandcontinue = By.cssSelector("button[data-automation-id='pageFooterNextButton01']");
 
 	public MyInformationPage(WebDriver driver) {
 		this.driver = driver;

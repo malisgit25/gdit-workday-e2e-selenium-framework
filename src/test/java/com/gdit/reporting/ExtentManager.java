@@ -1,5 +1,6 @@
 package com.gdit.reporting;
 
+import java.io.File;
 import java.util.Date;
 
 import org.apache.logging.log4j.LogManager;
@@ -19,10 +20,24 @@ public class ExtentManager {
 
 	public static synchronized ExtentReports createInstance() {
 		if (extent == null) {
-			Date d = new Date();
-			String fileName = "Extent_" + d.toString().replace(":", "_").replace(" ", "_") + ".html";
-			ExtentSparkReporter htmlReporter = new ExtentSparkReporter(
-					System.getProperty("user.dir") + "/reports/" + fileName);
+			/*
+			 * Date d = new Date(); String fileName = "Extent_" + d.toString().replace(":",
+			 * "_").replace(" ", "_") + ".html"; ExtentSparkReporter htmlReporter = new
+			 * ExtentSparkReporter( System.getProperty("user.dir") + "/docs/reports/" +
+			 * fileName);
+			 */	
+			
+			String reportPath = System.getProperty("user.dir") + "/docs/reports/index.html";
+
+	        // Create folder automatically
+	        File reportFile = new File(reportPath);
+	        File parentDir = reportFile.getParentFile();
+
+	        if (!parentDir.exists()) {
+	            parentDir.mkdirs();
+	        }
+
+	        ExtentSparkReporter htmlReporter = new ExtentSparkReporter(reportPath);
 			htmlReporter.config().setTheme(Theme.STANDARD);
 			htmlReporter.config().setEncoding("utf-8");
 			htmlReporter.config().setReportName("Automation Test Report");
@@ -30,11 +45,12 @@ public class ExtentManager {
 
 			extent = new ExtentReports();
 			extent.attachReporter(htmlReporter);
+			
 			extent.setSystemInfo("Automation Tester", "Mohammad");
 			extent.setSystemInfo("Organization", "Test");
 			extent.setSystemInfo("Build no", "Automation System 1.0.0");
 
-			log.info("ExtentReports instance created: " + fileName);
+			log.info("ExtentReports instance created: " + reportPath);
 		}
 		return extent;
 	}
